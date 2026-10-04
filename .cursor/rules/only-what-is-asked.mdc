@@ -1,0 +1,19 @@
+---
+description: Do only what the user asks. Add nothing extra.
+alwaysApply: true
+---
+
+# Only what is asked
+
+Do the requested task and stop.
+
+- Change only the files and behavior needed for that task.
+- Leave unrelated code, comments, formatting, and structure as they are.
+- Skip extra refactors, tests, docs, dependencies, and cleanup unless the user asks for them.
+- When the request is ambiguous, ask before adding work.
+
+```text
+User: "Rename the button label to Save."
+Do: change that label.
+Skip: restyling the button, updating copy elsewhere, adding a test.
+```
