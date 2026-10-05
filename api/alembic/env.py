@@ -5,6 +5,9 @@ from sqlalchemy import engine_from_config, pool
 
 from casebook.config import settings
 from casebook.persistence.base import Base
+from casebook.persistence.checklist_item import ChecklistItemRow
+
+_ = ChecklistItemRow
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)
