@@ -1,0 +1,20 @@
+---
+description: Use well-defined types and separate models that can be reused and found easily.
+alwaysApply: true
+---
+
+# Types and models
+
+Give every value a named type. Keep each model in its own file, grouped with the feature it belongs to.
+
+- A feature lives in one folder.
+- The model, the screen, and the functions for that feature are separate files in that folder.
+- Import a shared model instead of redefining its fields.
+- Request and response types stay distinct from the domain model.
+
+```text
+checklist/
+  item.tsx        ChecklistItem and how one item is shown
+  checklist.tsx   the list
+  functions.ts    add, update, complete, remove
+```
