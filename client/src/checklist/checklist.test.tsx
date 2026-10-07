@@ -26,10 +26,10 @@ it('strikes through a completed item and hides Complete', async () => {
   await render(<Checklist />);
 
   expect(await screen.findByText('Buy milk')).toBeTruthy();
-  await fireEvent.press(screen.getByText('Complete'));
+  await fireEvent.press(screen.getByLabelText('Complete'));
 
   await waitFor(() => {
-    expect(screen.queryByText('Complete')).toBeNull();
+    expect(screen.queryByLabelText('Complete')).toBeNull();
   });
   expect(StyleSheet.flatten(screen.getByText('Buy milk').props.style)).toEqual(
     expect.objectContaining({ textDecorationLine: 'line-through' }),

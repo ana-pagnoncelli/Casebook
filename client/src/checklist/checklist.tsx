@@ -1,3 +1,4 @@
+import { Feather } from '@expo/vector-icons';
 import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 
@@ -11,6 +12,8 @@ import {
 import { ChecklistItemView } from './item';
 import type { ChecklistItem } from './item';
 import { styles } from './styles';
+
+const mockedItemCount = 4;
 
 export function Checklist() {
   const [items, setItems] = useState<ChecklistItem[]>([]);
@@ -93,40 +96,50 @@ export function Checklist() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Checklist</Text>
-      <View style={styles.row}>
-        <TextInput
-          style={styles.input}
-          value={text}
-          onChangeText={setText}
-          placeholder="New item"
-          onSubmitEditing={() => {
-            void addItem();
-          }}
-        />
-        <Pressable style={styles.button} onPress={() => void addItem()}>
-          <Text>Add</Text>
-        </Pressable>
-      </View>
-      {loading ? <ActivityIndicator /> : null}
-      {error ? <Text>{error}</Text> : null}
-      <ScrollView style={styles.list}>
-        {items.map((item) => (
-          <ChecklistItemView
-            key={item.id}
-            item={item}
-            editing={editingId === item.id}
-            draft={draft}
-            onDraftChange={setDraft}
-            onUpdate={() => {
-              setEditingId(item.id);
-              setDraft(item.text);
+      <View style={styles.card}>
+        <View style={styles.sectionHeader}>
+          <View style={styles.sectionTitleRow}>
+            <View style={styles.dot} />
+            <Text style={styles.sectionTitle}>Anytime</Text>
+          </View>
+          <Text style={styles.count}>{mockedItemCount} items</Text>
+        </View>
+        <View style={styles.addRow}>
+          <TextInput
+            style={styles.addInput}
+            value={text}
+            onChangeText={setText}
+            placeholder="Add a new item..."
+            placeholderTextColor="#A0A8B4"
+            onSubmitEditing={() => {
+              void addItem();
             }}
-            onSave={() => void saveItem(item.id)}
-            onComplete={() => void completeItem(item.id)}
-            onRemove={() => void removeItem(item.id)}
           />
-        ))}
-      </ScrollView>
+          <Pressable accessibilityLabel="Add" onPress={() => void addItem()} style={styles.iconButton}>
+            <Feather name="plus" size={18} color="#98A2B3" />
+          </Pressable>
+        </View>
+        {loading ? <ActivityIndicator /> : null}
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+        <ScrollView style={styles.list}>
+          {items.map((item) => (
+            <ChecklistItemView
+              key={item.id}
+              item={item}
+              editing={editingId === item.id}
+              draft={draft}
+              onDraftChange={setDraft}
+              onUpdate={() => {
+                setEditingId(item.id);
+                setDraft(item.text);
+              }}
+              onSave={() => void saveItem(item.id)}
+              onComplete={() => void completeItem(item.id)}
+              onRemove={() => void removeItem(item.id)}
+            />
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
