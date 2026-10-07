@@ -1,6 +1,8 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 
 import type { components } from '../api/schema';
+
+import { styles } from './styles';
 
 export type ChecklistItem = components['schemas']['ChecklistItemResponse'];
 
@@ -54,35 +56,3 @@ export function ChecklistItemView({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  item: {
-    marginBottom: 12,
-    gap: 8,
-  },
-  itemText: {
-    fontSize: 16,
-  },
-  completed: {
-    fontSize: 16,
-    textDecorationLine: 'line-through',
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-  },
-});
